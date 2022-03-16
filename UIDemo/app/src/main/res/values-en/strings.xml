@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">UI-Demo</string>
+    <string name="introText">Hello! Welcomee.</string>
+    <string name="frage1">1. Layout: Linear and Constraint</string>
+    <string name="frage2">2. Events Example RatingBar</string>
+    <string name="frage3">3. Spinner</string>
+    <string name="frage4">4. Dialog</string>
+    <string name="radiobtn1">Linear Layout</string>
+    <string name="radiobtn2">Constraint Layout</string>
+    <string name="dialog">The company was founded by Henry Jarvis Raymond and George Jones in New York City. The first edition of the newspaper The New York Times, published on September 18, 1851, stated: "We publish today the first issue of the New-York Daily Times, and we intend to issue it every morning (Sundays excepted) for an indefinite number of years to come.</string>
+     <string name="spinnerAuswahl">You choosed: </string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+</resources>

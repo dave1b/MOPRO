@@ -1,0 +1,11 @@
+package ch.hslu.ui_demo
+
+import androidx.lifecycle.ViewModel
+
+class CounterViewModel: ViewModel() {
+    private var counter = 0
+    fun incCounter() {counter++}
+    fun getCount(): Int {return counter}
+
+
+}

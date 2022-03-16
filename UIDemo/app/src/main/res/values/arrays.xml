@@ -1,0 +1,14 @@
+<resources>
+    <string-array name="itCourses">
+        <item>Android für Profis</item>
+        <item>TypeScript für Dummies</item>
+        <item>Kotlin Einführung</item>
+        <item>Linux für Joho</item>
+    </string-array>
+
+    <string-array name="alertDialog">
+        <item>Alles</item>
+        <item>Ein bisschen was</item>
+        <item>Nichts</item>
+    </string-array>
+</resources>

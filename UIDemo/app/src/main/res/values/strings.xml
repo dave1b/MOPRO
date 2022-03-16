@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">UI-Demo</string>
+    <string name="introText">Hallo! Wilkommen zu dieser Umfrage.</string>
+    <string name="frage1">1. Layout: Linear und Constraint</string>
+    <string name="frage2">2. Events am Bsp. RatingBar</string>
+    <string name="frage3">3. Spinner</string>
+    <string name="frage4">4. Dialog</string>
+    <string name="radiobtn1">Linear Layout</string>
+    <string name="radiobtn2">Constraint Layout</string>
+    <string name="dialog">Der Krieg in der Ukraine hat in der Schweiz eine Debatte über die Sicherheitspolitik ausgelöst. Die bürgerlichen Parteien fordern deutlich mehr Geld und mehr Personal für die Armee. Nationalrätin Maja Riniker (FDP/AG) hat dazu im Parlament eine Motion eingereicht. Auch eine Dienstpflicht für Frauen, die der Bundesrat nun prüfen will, hält sie für überfällig.</string>
+    <string name="spinnerAuswahl">You choosed: </string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+</resources>

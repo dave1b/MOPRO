@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/gray">
+
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Beispiel Constrain Layout"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:textSize="30dp"
+        />
+
+    <EditText
+        android:id="@+id/editTextTextPersonName2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="52dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Produkt_ID"
+        app:layout_constraintStart_toStartOf="@id/textView6"
+        app:layout_constraintTop_toTopOf="@id/textView6" />
+
+
+
+    <EditText
+        android:id="@+id/editTextTextPersonName3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Menge"
+        app:layout_constraintTop_toBottomOf="@id/editTextTextPersonName2"
+        app:layout_constraintStart_toStartOf="@id/editTextTextPersonName2"
+        />
+
+    <CheckBox
+        android:id="@+id/checkBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sondertarif"
+        app:layout_constraintTop_toBottomOf="@id/editTextTextPersonName2"
+        app:layout_constraintStart_toEndOf="@id/editTextTextPersonName2"
+        />
+
+    <Button
+        android:id="@+id/viewModelCounter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/blue"
+        android:text="ViewModel: 0++"
+        app:layout_constraintTop_toBottomOf="@id/editTextTextPersonName3"
+        app:layout_constraintStart_toStartOf="@id/editTextTextPersonName3"
+        android:textColor="@color/white"/>
+
+    <Button
+        android:id="@+id/fragmentCounter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/gold"
+        android:text="Fragment: 0++"
+        app:layout_constraintTop_toBottomOf="@id/editTextTextPersonName3"
+        app:layout_constraintStart_toEndOf="@id/editTextTextPersonName3"
+        android:textColor="@color/white"
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
