@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
 <resources>
-
     <string-array name="teaSweetenerValues">
         <item>artificial</item>
         <item>refined</item>
@@ -12,5 +10,4 @@
         <item>Kristallzucker</item>
         <item>Rohrzucker</item>
     </string-array>
-
 </resources>

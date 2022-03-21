@@ -11,16 +11,7 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.fragment.app.activityViewModels
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [OverviewFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class OverviewFragment : Fragment(R.layout.fragment_overview) {
 
     private val sharedPreferencesViewModel: SharedPreferencesViewModel by activityViewModels()
