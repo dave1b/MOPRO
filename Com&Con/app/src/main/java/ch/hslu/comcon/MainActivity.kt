@@ -1,19 +1,22 @@
 package ch.hslu.comcon
 
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import android.widget.Toast
 import androidx.activity.viewModels
-import androidx.lifecycle.ViewModelProvider
+import androidx.appcompat.app.AlertDialog
 import androidx.work.Data
-import androidx.work.Logger
 import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.WorkManager
 import ch.hslu.comcon.databinding.ActivityMainBinding
+import java.util.concurrent.Executors
 
 
 class MainActivity : AppCompatActivity() {
@@ -33,11 +36,21 @@ class MainActivity : AppCompatActivity() {
         binding.btnSleep.setOnClickListener { sleepInMainThread(THREADS_SLEEP_TIME_IN_MS) }
         binding.btnDemoThread.setOnClickListener { startDemoThread(THREADS_SLEEP_TIME_IN_MS) }
         binding.btnDemoWorker.setOnClickListener { startDemoWorker(THREADS_SLEEP_TIME_IN_MS) }
-        binding.btnServerAnfrage.setOnClickListener { serverAnfrage(); Log.i("info", "from serverAnfrage()") }
+        binding.btnResetViewModel.setOnClickListener { resetBandsData() }
+        binding.btnServerAnfrage.setOnClickListener {
+            serverAnfrage(); Log.i(
+            "info",
+            "from serverAnfrage()"
+        )
+        }
+        binding.btnShowBandSelection.setOnClickListener { showBandDialog() }
         demoThread = createDemoThread(THREADS_SLEEP_TIME_IN_MS)
         bandsViewModel.bands.observe(this) { bands ->
             Log.i("MainActivity|bandListRequest", "bands observed")
             binding.mainNumberOfBands.text = "#Bands " + bands.size
+        }
+        bandsViewModel.currentBandInfo.observe(this) { bandInfo ->
+            this.showSelectedBandInfo(bandInfo)
         }
     }
 
@@ -93,7 +106,70 @@ class MainActivity : AppCompatActivity() {
 
     private fun serverAnfrage() {
         bandsViewModel.getBands()
-        //binding.mainNumberOfBands.text = "#Bands " + bandsViewModel.bands
+    }
+
+    private fun resetBandsData() {
+        this.bandsViewModel.resetBandsData()
+    }
+
+    private fun showBandDialog() {
+        if (this.bandsViewModel.bands.value.isNullOrEmpty()) {
+            Log.i("bandSelection", "entered!!")
+            Toast.makeText(
+                applicationContext,
+                "Die Liste von Bands ist leer. Lade sie zuersts.",
+                Toast.LENGTH_SHORT
+            ).show()
+            return
+        }
+        val bandNames = arrayOfNulls<String>(this.bandsViewModel.bands.value!!.size)
+
+        for (i in this.bandsViewModel.bands.value!!.indices) {
+            bandNames[i] = this.bandsViewModel.bands.value!![i].name
+        }
+
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle("Welche Band?")
+        builder.setItems(bandNames) { dialog, index ->
+            bandsViewModel.getCurrentBand(this.bandsViewModel.bands.value!![index].code)
+        }
+        builder.setNegativeButton("Abbrechen") { _, _ ->
+            Toast.makeText(this@MainActivity, "Nichts ausgewählt", Toast.LENGTH_SHORT).show()
+        }
+        builder.show()
+    }
+
+    private fun showSelectedBandInfo(bandInfo: BandInfo?) {
+
+        if(bandInfo?.name.isNullOrEmpty()){
+            binding.bandName.text = ""
+            binding.originFounding.text = ""
+            binding.imageBand.visibility = GONE
+            return
+        }
+        val bandInfo: BandInfo = bandInfo!!
+        binding.bandName.text = bandInfo.name
+        binding.originFounding.text = bandInfo.homeCountry + " Gründung: " + bandInfo.foundingYear
+
+        val executor = Executors.newSingleThreadExecutor()
+        val handler = Handler(Looper.getMainLooper())
+        executor.execute {
+            try {
+                val `in` = java.net.URL(bandInfo.bestOfCdCoverImageUrl).openStream()
+                var image: Bitmap? = BitmapFactory.decodeStream(`in`)
+
+                // Only for making changes in UI
+                handler.post {
+                    binding.imageBand.setImageBitmap(image)
+                    binding.imageBand.visibility = VISIBLE
+                }
+            }
+            // If the URL doesnot point to
+            // image or any other kind of failure
+            catch (e: Exception) {
+                e.printStackTrace()
+            }
+        }
     }
 
 }
